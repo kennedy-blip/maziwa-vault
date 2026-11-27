@@ -71,6 +71,8 @@ class AppStore extends ChangeNotifier {
   Future<void> addFarmer(Farmer f) async { farmers.add(f); await save(); notifyListeners(); }
   Future<void> addDelivery(Delivery d) async { deliveries.insert(0, d); await save(); notifyListeners(); }
   Future<void> addAdvance(Advance a) async { advances.insert(0, a); await save(); notifyListeners(); }
+  Future<void> updateAdvance(Advance a) async { if (!isManager) return; final i = advances.indexWhere((item) => item.id == a.id); if (i < 0) return; advances[i] = a; await save(); notifyListeners(); }
+  Future<void> removeAdvance(String id) async { if (!isManager) return; advances.removeWhere((item) => item.id == id); await save(); notifyListeners(); }
   Future<void> setRole(UserRole v) async { role = v; await save(); notifyListeners(); }
   Future<void> setTheme(VaultTheme v) async { theme = v; await save(); notifyListeners(); }
   Future<void> setRate(double v) async { if (isManager) { ratePerLiter = v; await save(); notifyListeners(); } }
