@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';\nimport 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 import '../models/models.dart';
 import '../storage/app_store.dart';
