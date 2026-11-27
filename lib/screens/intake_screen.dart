@@ -23,7 +23,7 @@ class IntakeScreen extends StatelessWidget {
         const SizedBox(height: 10),
         if (s.deliveries.isEmpty) const Text('No deliveries recorded yet.'),
         ...s.deliveries.take(30).map((d) {
-          final f = s.farmers.where((x) => x.id == d.farmerId).firstOrNull;
+          final matches = s.farmers.where((x) => x.id == d.farmerId);\n          final f = matches.isEmpty ? null : matches.first;
           final accepted = d.status == QualityStatus.accepted;
           return ListTile(contentPadding: EdgeInsets.zero, leading: CircleAvatar(backgroundColor: (accepted ? Colors.teal : Colors.orange).withValues(alpha: .15), child: Icon(accepted ? Icons.check : Icons.warning_amber, color: accepted ? Colors.teal : Colors.orange)),
             title: Text(f?.name ?? 'Unknown farmer', style: const TextStyle(fontWeight: FontWeight.w600)),
