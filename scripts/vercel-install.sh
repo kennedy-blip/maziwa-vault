@@ -6,3 +6,4 @@ fi
 export PATH="$HOME/flutter/bin:$PATH"
 flutter --version
 flutter precache --web
+flutter create --platforms=web --project-name maziwa_vault .
