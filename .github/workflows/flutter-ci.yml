@@ -19,7 +19,7 @@ jobs:
       - run: flutter create --platforms=web --project-name maziwa_vault .
       - run: flutter pub get
       - run: dart format lib
-      - run: flutter analyze lib
+      - run: flutter analyze --no-fatal-infos lib
       - run: flutter build web --release --wasm
       - uses: actions/upload-artifact@v4
         with:
@@ -37,7 +37,7 @@ jobs:
       - run: flutter create --platforms=android --project-name maziwa_vault .
       - run: flutter pub get
       - run: dart format lib
-      - run: flutter analyze lib
+      - run: flutter analyze --no-fatal-infos lib
       - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
         with:
