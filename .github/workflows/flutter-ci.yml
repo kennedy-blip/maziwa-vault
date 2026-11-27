@@ -1,0 +1,48 @@
+name: Flutter CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  analyze-and-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: dart format --output=none --set-exit-if-changed lib
+      - run: flutter analyze
+      - run: flutter build web --release --wasm
+      - uses: actions/upload-artifact@v4
+        with:
+          name: maziwa-vault-web
+          path: build/web/
+  android-release:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: flutter build apk --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MaziwaVault-Android-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
+      - name: Publish latest APK release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: MaziwaVault latest Android build
+          make_latest: true
+          files: build/app/outputs/flutter-apk/app-release.apk
