@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';\nimport 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 import '../models/models.dart';
 import '../storage/app_store.dart';
@@ -55,9 +56,13 @@ class SettingsScreen extends StatelessWidget {
         const Text('Android application', style: TextStyle(fontWeight: FontWeight.w700)),
         const SizedBox(height: 6), const Text('Install the latest signed release build on a compatible Android device.'),
         const SizedBox(height: 12),
-        FilledButton.icon(onPressed: () => Clipboard.setData(const ClipboardData(text: 'https://github.com/kennedy-blip/maziwa-vault/releases/latest/download/MaziwaVault.apk')).then((_) {
-          if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('APK release link copied. Open it in your browser to download.')));
-        }), icon: const Icon(Icons.android), label: const Text('Copy Android APK download link')),
+        FilledButton.icon(onPressed: () async {
+          final uri = Uri.parse('https://github.com/kennedy-blip/maziwa-vault/releases/latest/download/app-release.apk');
+          final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
+          if (!opened && context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Could not open the APK release. Check your connection and try again.')));
+          }
+        }, icon: const Icon(Icons.android), label: const Text('Download Android APK')),
       ])),
       const SizedBox(height: 24),
       Center(child: Text('MAZIWAVAULT • VERSION 1.0.0', style: Theme.of(context).textTheme.labelSmall?.copyWith(letterSpacing: 1.5))),
