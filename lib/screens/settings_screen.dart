@@ -54,7 +54,7 @@ class SettingsScreen extends StatelessWidget {
       const SizedBox(height: 14),
       GlassPanel(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const Text('Android application', style: TextStyle(fontWeight: FontWeight.w700)),
-        const SizedBox(height: 6), const Text('Install the latest signed release build on a compatible Android device.'),
+        const SizedBox(height: 6), const Text('Install the latest Android release build on a compatible device.'),
         const SizedBox(height: 12),
         FilledButton.icon(onPressed: () async {
           final uri = Uri.parse('https://github.com/kennedy-blip/maziwa-vault/releases/latest/download/app-release.apk');
