@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/models.dart';
 import '../storage/app_store.dart';
-import '../theme/app_theme.dart';
 
 class PayoutsScreen extends StatelessWidget {
   const PayoutsScreen({super.key});
