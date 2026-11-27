@@ -90,5 +90,8 @@ class AppStore extends ChangeNotifier {
   double get acceptedTotal => deliveries.where((d) => d.status == QualityStatus.accepted).fold(0, (s, d) => s + d.liters);
   double get rejectedTotal => deliveries.where((d) => d.status != QualityStatus.accepted).fold(0, (s, d) => s + d.liters);
   double get tankUse => (acceptedTotal / tankCapacity).clamp(0, 1).toDouble();
-  String farmerName(String id) => farmers.where((f) => f.id == id).map((f) => f.name).firstOrNull ?? 'Unknown farmer';
+  String farmerName(String id) {
+    final matches = farmers.where((f) => f.id == id);
+    return matches.isEmpty ? 'Unknown farmer' : matches.first.name;
+  }
 }
