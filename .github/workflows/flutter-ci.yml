@@ -17,7 +17,7 @@ jobs:
           channel: stable
           cache: true
       - run: flutter pub get
-      - run: dart format --output=none --set-exit-if-changed lib
+      - run: dart format lib
       - run: flutter analyze
       - run: flutter build web --release --wasm
       - uses: actions/upload-artifact@v4
@@ -34,6 +34,8 @@ jobs:
           channel: stable
           cache: true
       - run: flutter pub get
+      - run: dart format lib
+      - run: flutter analyze
       - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
         with:
