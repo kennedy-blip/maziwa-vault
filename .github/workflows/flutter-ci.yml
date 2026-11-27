@@ -16,6 +16,7 @@ jobs:
         with:
           channel: stable
           cache: true
+      - run: flutter create --platforms=web --project-name maziwa_vault .
       - run: flutter pub get
       - run: dart format lib
       - run: flutter analyze
@@ -33,6 +34,7 @@ jobs:
         with:
           channel: stable
           cache: true
+      - run: flutter create --platforms=android --project-name maziwa_vault .
       - run: flutter pub get
       - run: dart format lib
       - run: flutter analyze
